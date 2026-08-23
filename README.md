@@ -1,25 +1,95 @@
-# Serenity JUnit Starter project
+# MySerenity
 
-Get started quickly with Serenity BDD and JUnit 5 with this simple starter project. 
+This project contains Java interview-practice code for:
+- Java core concepts
+- Selenium UI automation
+- RestAssured API automation
+- Maven-based CI/CD setup
 
-## Get the code
+## Project structure
 
-Click on the [Use This Template button](https://github.com/serenity-bdd/serenity-junit-starter/generate) to create a new project in your own Github account. 
+```text
+src/
+├── main/
+│   └── java/
+│       ├── com/practice/app/App.java
+│       └── com/practice/utils/ConfigReader.java
+├── test/
+│   └── java/
+│       ├── com/practice/api/
+│       │   ├── TodoApiTest.java
+│       │   ├── CrudApiPractice.java
+│       │   └── ...
+│       └── com/practice/web/
+│           ├── LoginPageTest.java
+│           └── pages/
+│               └── LoginPage.java
+└── test/resources/
+    └── config.properties
+```
 
-Or simply [download a zip](https://github.com/serenity-bdd/serenity-junit-starter/archive/master.zip) file.
+## Prerequisites
 
-## Running the tests under Maven
+- Java 17+
+- Maven 3.9+
+- Docker (optional)
+- Jenkins (optional)
 
-The template project comes with both Maven and Gradle build scripts. To run the tests with Maven, open a command window and run:
+## Run tests locally
 
-  ./mvnw clean verify
+```bash
+./mvnw test
+```
 
-## Use Gradle
+## Run only Selenium test
 
-For GRADLE, pen a command window and run:
+```bash
+./mvnw test -Dtest=com.practice.web.LoginPageTest
+```
 
-  ./gradlew test 
+## Run only API tests
 
-## Viewing the reports
+```bash
+./mvnw test -Dtest=com.practice.api.*
+```
 
-Both of the commands provided above will produce a Serenity test report in the `target/site/serenity` directory. Go take a look!
+## Build the JAR
+
+```bash
+./mvnw package
+```
+
+## Run with Docker
+
+```bash
+docker-compose up --build
+```
+
+## Jenkins setup
+
+1. Install the following Jenkins plugins:
+   - GitHub plugin
+   - Pipeline plugin
+   - JUnit plugin
+2. Create a new Pipeline job.
+3. Point it to this repository.
+4. Use the existing `Jenkinsfile` in the repo root.
+5. Configure a GitHub webhook for push events.
+
+### GitHub webhook example
+
+- Go to GitHub repo -> Settings -> Webhooks -> Add webhook
+- Payload URL: `http://<your-jenkins-host>/github-webhook/`
+- Content type: `application/json`
+- Trigger: `Just the push event`
+
+## GitHub Actions
+
+This repo includes `.github/workflows/ci.yml`.
+It runs automatically on pushes and pull requests to `main` and `master`.
+
+## Notes
+
+- Selenium tests use WebDriverManager to manage ChromeDriver automatically.
+- API tests use JSONPlaceholder for interview-practice calls.
+- The Selenium login example is a demonstration flow and can be adapted to a real app.

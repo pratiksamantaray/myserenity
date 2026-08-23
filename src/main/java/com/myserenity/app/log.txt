@@ -1,0 +1,6 @@
+INFO Transaction ID=TX1001 completed
+INFO Transaction ID=TX1002 completed
+ERROR Transaction ID=TX1003 failed
+INFO Transaction ID=TX1001 completed
+ERROR Transaction ID=TX1004 failed
+ERROR Transaction ID=TX1003 failed
