@@ -27,11 +27,11 @@ pipeline {
             }
         }
 
-        stage('Package') {
+       /*  stage('Package') {
             steps {
                 sh './mvnw -q -DskipTests package'
             }
-        }
+        } */
 
         stage('Docker Build') {
             steps {
@@ -42,7 +42,8 @@ pipeline {
 
     post {
         always {
-            junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
+           junit allowEmptyResults: true,
+                 testResults: 'target/failsafe-reports/*.xml'
         }
         success {
             echo 'Build and tests passed.'
