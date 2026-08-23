@@ -13,7 +13,7 @@ public class TodoApiTest {
     private static final String BASE_URL = ConfigReader.getProperty("api.base.url");
 
     @Test
-    void shouldGetTodoById() {
+    void shouldGetTodoById1() {
         given()
             .baseUri(BASE_URL)
             .contentType(ContentType.JSON)
@@ -24,6 +24,19 @@ public class TodoApiTest {
             .body("userId", equalTo(1))
             .body("id", equalTo(1))
             .body("title", notNullValue());
+    }
+    @Test
+    void shouldGetTodoById2() {
+        given()
+                .baseUri(BASE_URL)
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/todos/1")
+                .then()
+                .statusCode(200)
+                .body("userId", equalTo(1))
+                .body("id", equalTo(1))
+                .body("title", notNullValue());
     }
 
     @Test
